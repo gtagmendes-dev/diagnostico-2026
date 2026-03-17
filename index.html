@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Empresarial 2026</title>
+    
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    
+    <!-- jsPDF (client-side PDF generation) -->
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+    
+    <!-- Styles & Script -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- SCREEN 1: WELCOME -->
+    <main id="screen-welcome" class="screen active fade-in">
+        <div class="container welcome-container">
+            <div class="welcome-content">
+                <div class="logo-placeholder">
+                    <span class="icon">📈</span>
+                </div>
+                <h1 class="main-title">Diagnóstico Empresarial 2026</h1>
+                <p class="subtitle">O quanto seu negócio está preparado para crescer?</p>
+                <ul style="text-align:left; color: var(--color-text-muted); margin: 1.5rem 0; padding-left: 1.2rem; line-height: 2;">
+                    <li>Onde está o gargalo do seu negócio</li>
+                    <li>O que está limitando seu crescimento</li>
+                    <li>O que precisa ser ajustado para crescer em 2026</li>
+                </ul>
+                <button id="btn-start" class="btn btn-primary btn-large">
+                    Começar diagnóstico
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            <div class="welcome-visual">
+                <div class="circle-decoration circle-1"></div>
+                <div class="circle-decoration circle-2"></div>
+                <div class="circle-decoration circle-3"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCREEN 2: QUIZ -->
+    <main id="screen-quiz" class="screen hidden">
+        <div class="container quiz-container">
+            
+            <header class="quiz-header">
+                <div class="progress-wrapper">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progress-count">1</span> / <span id="total-count">25</span>
+                    </div>
+                </div>
+                <div class="category-badge" id="category-badge">
+                    Liderança
+                </div>
+            </header>
+
+            <div class="question-card fade-in" id="question-card">
+                <h2 id="question-text" class="question-title">A liderança comunica claramente a visão da empresa?</h2>
+                
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>Muito fraco<br>Inexistente (0)</span>
+                        <span>Excelente<br>Totalmente estruturado (10)</span>
+                    </div>
+                    <input type="range" id="answer-slider" min="0" max="10" value="5" step="1" class="slider">
+                    <div class="current-value-display">
+                        <span id="slider-value">5</span>
+                    </div>
+                </div>
+
+                <div class="quiz-actions">
+                    <button id="btn-prev" class="btn btn-secondary" style="visibility: hidden;">Anterior</button>
+                    <button id="btn-next" class="btn btn-primary">Próxima Métrica</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCREEN 3: LEAD CAPTURE -->
+    <main id="screen-lead" class="screen hidden">
+        <div class="container lead-container fade-in">
+            <div class="lead-card">
+                <div class="icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h2>Diagnóstico Concluído!</h2>
+                <p>Preencha os dados abaixo para gerar seu radar estratégico e receber os resultados detalhados.</p>
+                
+                <form id="lead-form" class="lead-form">
+                    <div class="form-group">
+                        <label for="lead-name">Nome Completo</label>
+                        <input type="text" id="lead-name" required placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-company">Empresa</label>
+                        <input type="text" id="lead-company" required placeholder="Nome do seu negócio">
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-email">E-mail Profissional</label>
+                        <input type="email" id="lead-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-phone">Telefone / WhatsApp</label>
+                        <input type="tel" id="lead-phone" required placeholder="(00) 00000-0000">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block btn-large">
+                        Ver Meu Diagnóstico
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCREEN 4: RESULTS -->
+    <main id="screen-result" class="screen hidden">
+        <div class="container result-container fade-in">
+            
+            <header class="result-header">
+                <h2>Seu Diagnóstico 2026</h2>
+                <p>Veja como está seu negócio e o que precisa ser ajustado para crescer.</p>
+            </header>
+
+            <div class="result-grid">
+                <!-- CHART SECTION -->
+                <div class="chart-section card">
+                    <div class="chart-wrapper">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- SCORES & ANALYSIS SECTION -->
+                <div class="analysis-section">
+                    <div class="scores-card card">
+                        <div class="general-score-wrapper">
+                            <h3>Nota Geral</h3>
+                            <div class="general-score-display">
+                                <span id="general-score-value" class="score-value-large">0.0</span>
+                                <span id="general-status-badge" class="score-badge"></span>
+                            </div>
+                        </div>
+                        <h3>Pontuações por Área</h3>
+                        <div id="scores-list" class="scores-list">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+
+                    <div class="textual-diagnosis card">
+                        <h3>Análise Resumida</h3>
+                        <div id="analysis-list" class="analysis-list">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cta-section"></div>
+
+            <div class="result-actions">
+                <button id="btn-download-pdf" class="btn btn-primary btn-large cta-pulse">Baixar Meu Diagnóstico (PDF)</button>
+                <button id="btn-restart" class="btn btn-text">Refazer teste</button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
