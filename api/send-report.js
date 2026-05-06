@@ -38,7 +38,9 @@ export default async function handler(req, res) {
             <tr><td style="padding:8px 12px; border-bottom:1px solid #222;"><strong>Nome</strong></td><td style="padding:8px 12px; border-bottom:1px solid #222;">${leadData.name}</td></tr>
             <tr><td style="padding:8px 12px; border-bottom:1px solid #222;"><strong>Empresa</strong></td><td style="padding:8px 12px; border-bottom:1px solid #222;">${leadData.company}</td></tr>
             <tr><td style="padding:8px 12px; border-bottom:1px solid #222;"><strong>Email</strong></td><td style="padding:8px 12px; border-bottom:1px solid #222;">${leadData.email}</td></tr>
-            <tr><td style="padding:8px 12px;"><strong>Telefone</strong></td><td style="padding:8px 12px;">${leadData.phone}</td></tr>
+            <tr><td style="padding:8px 12px; border-bottom:1px solid #222;"><strong>Telefone</strong></td><td style="padding:8px 12px; border-bottom:1px solid #222;">${leadData.phone}</td></tr>
+            <tr><td style="padding:8px 12px; border-bottom:1px solid #222;"><strong>Faturamento Mensal</strong></td><td style="padding:8px 12px; border-bottom:1px solid #222;">${leadData.revenue}</td></tr>
+            <tr><td style="padding:8px 12px;"><strong>Objetivo 2026</strong></td><td style="padding:8px 12px;">${leadData.goal}</td></tr>
           </table>
 
           <div style="background:#1a1a1a; border-radius:8px; padding:20px; margin-bottom:24px;">

@@ -163,6 +163,8 @@ function handleLeadSubmit(e) {
         company: document.getElementById('lead-company').value,
         email: document.getElementById('lead-email').value,
         phone: document.getElementById('lead-phone').value,
+        revenue: document.getElementById('lead-revenue').value,
+        goal: document.getElementById('lead-goal').value,
         date: new Date().toISOString()
     };
 
@@ -489,7 +491,7 @@ async function handleDownloadPdf() {
         // Lead data box
         y += 60;
         doc.setFillColor(20, 20, 20);
-        doc.roundedRect(mx, y, maxW, 120, 8, 8, 'F');
+        doc.roundedRect(mx, y, maxW, 160, 8, 8, 'F');
 
         y += 30;
         doc.setFontSize(10);
@@ -501,7 +503,14 @@ async function handleDownloadPdf() {
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(...white);
         doc.setFontSize(11);
-        [`Nome: ${leadData?.name || '-'}`, `Empresa: ${leadData?.company || '-'}`, `Email: ${leadData?.email || '-'}`, `Telefone: ${leadData?.phone || '-'}`]
+        [
+            `Nome: ${leadData?.name || '-'}`,
+            `Empresa: ${leadData?.company || '-'}`,
+            `Email: ${leadData?.email || '-'}`,
+            `Telefone: ${leadData?.phone || '-'}`,
+            `Faturamento Mensal: ${leadData?.revenue || '-'}`,
+            `Objetivo para 2026: ${leadData?.goal || '-'}`
+        ]
             .forEach(item => { doc.text(item, mx + 20, y); y += 18; });
 
         // Total score
